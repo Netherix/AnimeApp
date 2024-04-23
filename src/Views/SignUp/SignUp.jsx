@@ -9,12 +9,14 @@ import {
 import "./SignUp.css";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import auth from "../../Firebase";
+import { Link } from "react-router-dom";
 
 function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [error, setError] = useState("");
+  const [registrationSuccess, setRegistrationSuccess] = useState(false); 
 
   const handleRegister = async () => {
     if (password !== repeatPassword) {
@@ -24,9 +26,8 @@ function SignUp() {
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
+      setRegistrationSuccess(true); 
       console.log("User registered successfully!");
-      // You can redirect the user to another page or display a success message
     } catch (error) {
       setError(error.message);
     }
@@ -72,6 +73,9 @@ function SignUp() {
             onChange={(e) => setRepeatPassword(e.target.value)}
           />
           {error && <div className="text-danger mb-3">{error}</div>}
+          {registrationSuccess && (
+            <div className="text-success mb-3">Registration successful!</div>
+          )}
           <MDBBtn
             className="mb-4 w-100 gradient-custom-4"
             size="lg"
@@ -79,6 +83,11 @@ function SignUp() {
           >
             Register
           </MDBBtn>
+          <div className="text-center">
+            <span>Already have an account? </span>
+            <br/>
+            <Link to="/signin">Click here to login</Link>
+          </div>
         </MDBCardBody>
       </MDBCard>
     </MDBContainer>

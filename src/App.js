@@ -1,12 +1,15 @@
-import React from 'react'
-import SignUp from './Views/SignUp/SignUp'
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import SignUp from './Views/SignUp/SignUp';
+import SignIn from './Views/SignIn/SignIn';
 
 const App = () => {
   return (
-    <div>
-      <SignUp />
-    </div>
-  )
+    <Routes>
+      <Route exact path="/signup" element={<SignUp />} />
+      <Route exact path="/signin" element={<SignIn />} />
+    </Routes>
+  );
 }
 
-export default App
+export default App;
