@@ -4,6 +4,7 @@
   "description": "template for mdb-react-ui-kit",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "7.21.11",
     "firebase": "^10.11.0",
     "firebase-auth": "^0.1.2",
     "mdb-react-ui-kit": "^8.0.0",
@@ -36,5 +37,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-private-property-in-object": "^7.24.1"
   }
 }

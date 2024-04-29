@@ -85,7 +85,6 @@ function SignUp() {
           </MDBBtn>
           <div className="text-center">
             <span>Already have an account? </span>
-            <br/>
             <Link to="/signin">Click here to login</Link>
           </div>
         </MDBCardBody>
