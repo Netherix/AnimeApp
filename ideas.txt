@@ -1,0 +1,17 @@
+Home page/Explore page. (home could be sepearte from explore)
+
+Watched
+
+Watchlist
+
+Favorites
+
+Other ideas:
+
+Recommendation Algo
+
+Blog posts
+
+Review/Comment
+
+Featured Anime

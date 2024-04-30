@@ -5,10 +5,12 @@
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "7.21.11",
+    "bootstrap": "^5.3.3",
     "firebase": "^10.11.0",
     "firebase-auth": "^0.1.2",
     "mdb-react-ui-kit": "^8.0.0",
     "react": "^18.1.0",
+    "react-bootstrap": "^2.9.0-beta.1",
     "react-dom": "^18.1.0",
     "react-router-dom": "^6.23.0",
     "react-scripts": "5.0.1",
