@@ -4,6 +4,7 @@ import AnimeCards from '../../Components/AnimeCards/AnimeCards';
 
 const Home = () => {
   const [animeList, setAnimeList] = useState([]);
+  const [nextPageUrl, setNextPageUrl] = useState(null);
 
   useEffect(() => {
     const fetchAnimeData = async () => {
@@ -14,6 +15,7 @@ const Home = () => {
         }
         const data = await response.json();
         setAnimeList(data.data);
+        setNextPageUrl(data.links.next); // Set the next page URL
       } catch (error) {
         console.error('Error fetching anime data:', error);
       }
@@ -21,6 +23,22 @@ const Home = () => {
 
     fetchAnimeData();
   }, []);
+
+  const fetchNextPage = async () => {
+    try {
+      if (nextPageUrl) {
+        const response = await fetch(nextPageUrl);
+        if (!response.ok) {
+          throw new Error('Failed to fetch next page data');
+        }
+        const data = await response.json();
+        setAnimeList([...animeList, ...data.data]); // Append new data to the existing anime list
+        setNextPageUrl(data.links.next); // Update the next page URL
+      }
+    } catch (error) {
+      console.error('Error fetching next page data:', error);
+    }
+  };
 
   return (
     <div>
@@ -36,6 +54,9 @@ const Home = () => {
           />
         ))}
       </div>
+      {nextPageUrl && (
+        <button onClick={fetchNextPage}>Next Page</button>
+      )}
     </div>
   );
 };
