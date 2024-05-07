@@ -10,6 +10,7 @@ import {
   MDBNavbarBrand,
   MDBCollapse
 } from 'mdb-react-ui-kit';
+import SignOut from '../../Views/SignOut/SignOut';
 
 export default function App() {
   const [openNavColorThird, setOpenNavColorThird] = useState(false);
@@ -42,6 +43,9 @@ export default function App() {
             </MDBNavbarItem>
             <MDBNavbarItem>
               <MDBNavbarLink href='#'>Watchlist</MDBNavbarLink>
+            </MDBNavbarItem>
+            <MDBNavbarItem>
+              <SignOut />
             </MDBNavbarItem>
           </MDBNavbarNav>
         </MDBCollapse>
