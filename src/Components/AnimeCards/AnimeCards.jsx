@@ -21,7 +21,6 @@ function AnimeCards({ imageUrl, title, description }) {
         <Card.Text>
           {truncatedDescription}
         </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
       </Card.Body>
     </Card>
   );
