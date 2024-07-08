@@ -18,7 +18,7 @@ export default function App() {
   return (
     <MDBNavbar expand='lg' light style={{ backgroundColor: '#e3f2fd' }}>
       <MDBContainer fluid>
-        <MDBNavbarBrand href='#'>AnimeApp</MDBNavbarBrand>
+        <MDBNavbarBrand href='/home'>AnimeApp</MDBNavbarBrand>
         <MDBNavbarToggler
           type='button'
           data-target='#navbarColor02'

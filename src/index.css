@@ -1,4 +1,5 @@
 body {
+  background-color: #f2f2f2 !important;
   margin: 0;
   font-family: 'Fresca', sans-serif !important; /* Replace with your desired font */
   -webkit-font-smoothing: antialiased;

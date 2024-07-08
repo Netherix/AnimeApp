@@ -2,16 +2,18 @@ import React, { useEffect, useState, useRef } from "react";
 import Navbar from '../../Components/Navbar/Navbar';
 import AnimeCards from '../../Components/AnimeCards/AnimeCards';
 import Search from '../../Components/Search/Search';
+import CategoryDropdown from '../../Components/CategoryDropdown/CategoryDropdown'; // Import the new component
 
 const Home = () => {
   const [animeList, setAnimeList] = useState([]);
   const [nextPageUrl, setNextPageUrl] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null); // State to store selected category
   const observer = useRef();
 
   useEffect(() => {
     fetchAnimeData();
-  }, []);
+  }, [selectedCategory]); // Trigger fetchAnimeData when selectedCategory changes
 
   useEffect(() => {
     const options = {
@@ -50,12 +52,19 @@ const Home = () => {
         observer.current.disconnect();
       }
     };
-  }, [nextPageUrl, loading]);
+  }, [nextPageUrl, loading, selectedCategory]);
 
-  const fetchAnimeData = async (searchQuery = '') => {
+  const fetchAnimeData = async (searchQuery = '', category = selectedCategory) => {
     try {
       setLoading(true);
-      const url = searchQuery ? `https://kitsu.io/api/edge/anime?filter[text]=${searchQuery}` : 'https://kitsu.io/api/edge/anime';
+      let url = 'https://kitsu.io/api/edge/anime';
+      
+      if (category) {
+        url += `?filter[categories]=${category}`;
+      } else if (searchQuery) {
+        url += `?filter[text]=${searchQuery}`;
+      }
+      
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error('Failed to fetch anime data');
@@ -74,15 +83,40 @@ const Home = () => {
     fetchAnimeData(query);
   };
 
+  const handleCategoryChange = (event) => {
+    const category = event.target.value;
+    setSelectedCategory(category);
+    fetchAnimeData('', category); // Fetch anime data based on selected category
+  };
+
+  // Define anime categories sorted alphabetically
+  const categories = [
+    'Action',
+    'Adventure',
+    'Comedy',
+    'Mecha',
+    'Music',
+    'Romance',
+    'Slice-of-life',
+    'Sports',
+    'Thriller'
+  ];
+
   return (
     <div>
       <Navbar />
       <h2 className="text-center my-4">Anime Titles</h2>
       <Search onSearch={handleSearch} />
+      <CategoryDropdown
+        categories={categories}
+        selectedCategory={selectedCategory}
+        onChange={handleCategoryChange}
+      />
       <div className="card-container">
         {animeList.map((anime) => (
           <AnimeCards
             key={anime.id}
+            id={anime.id}
             imageUrl={anime.attributes.posterImage.small}
             title={anime.attributes.canonicalTitle}
             description={anime.attributes.synopsis}
